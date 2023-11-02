@@ -1,0 +1,134 @@
+<mvc:View
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:smc="sap.ui.comp.smartmicrochart"
+    xmlns:mc="sap.suite.ui.microchart"
+    xmlns:l="sap.ui.layout"
+    xmlns:f="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:html="http://www.w3.org/1999/xhtml"
+    xmlns:plugins="sap.ui.table.plugins"
+    xmlns:table="sap.ui.table"
+    xmlns:tnt="sap.tnt"
+    width="100%"
+    height="100%"
+>
+    <Panel id="idNetWeightPanelPlugin" width="100%" height="100%" expandable="false" expanded="false" accessibleRole="Region" backgroundDesign="Transparent" class="initialScaleApp sapUiNoContentPadding">
+        <content>
+       
+            <VBox>
+                <f:SimpleForm id="idformNetWeight" minWidth="1024" maxContainerCols="2" editable="true" layout="ResponsiveGridLayout" labelSpanL="4" labelSpanM="4" emptySpanL="0" emptySpanM="0" columnsL="2"
+                class="customTextHeightInput" columnsM="2">
+                    <f:content>
+                        <core:Title text="FIR Netweight" />
+                         
+                        <Label text="" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox/>
+
+                        <Label text="Scan or Select SFC" labelFor="idComboBoxSFC" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox height="3rem" >
+                        <Input id="idComboBoxSFC" placeholder="" 
+                                    type="Text" value="{SFCLISTMODEL>/selectedSFC}" 
+                                    showValueHelp="true"  valueStateText="" 
+                                    valueState="Success" class="customScanText"
+                                    maxLength="0" 
+                                    valueHelpRequest="onOpenSFCValueHelp"
+                                    liveChange="onSFCSelect" submit="onSFCScanSubmit" />
+                        </HBox>
+
+                        <Label text="" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox/>
+
+                        <Label  text="SFC Initial Weight" labelFor="idSFCWeightQty" class="mediumText sapUiMediumMarginEnd" />
+                        
+                          <FlexBox height="3rem">
+                            <Input id="idSFCWeightQty" placeholder="" required="true"
+                                    type="Number" value="{SFCLISTMODEL>/selectedSFCQty}" 
+                                    width="auto" showValueHelp="false"  valueStateText="" 
+                                    valueState="Success" class="customScanText" maxLength="0" />
+                            <HBox id="idVBoxSFCUOM" visible="true" class="sapUiTinyMarginBegin">
+                            
+                              <Input id="idSFCWeightUOM" placeholder=""
+                                     type="Text" 
+                                     value="{SFCLISTMODEL>/selectedSFCUOM}" 
+                                     width="auto" showValueHelp="false"  
+                                     valueStateText="" valueState="Success" 
+                                     class="customScanText" 
+                                     editable="false" maxLength="0" />
+                                <layoutData>
+                                    <l:GridData xmlns:layout="sap.ui.layout" span="L3 M3 S4" /> 
+                                </layoutData>
+                            </HBox>
+                        </FlexBox>
+
+
+                        <Label text="" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox/>
+
+                        <Label  text="Employee Id" labelFor="idInputScanEmployeeId" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox height="3rem" >
+                        <Input id="idInputScanEmployeeId" placeholder="Scan Employee Id" type="Text" 
+                        value=""  showValueHelp="false" submit="onScanEmployeeId" required="true" 
+                        valueStateText="" valueState="Success" class="customScanText" maxLength="0" />
+                        </HBox>
+
+                        <Label text="" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox/>
+
+                        <Label text="Select Scale" labelFor="idComboBoxScale1" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox height="3rem" >
+                        <ComboBox id="idComboBoxScale" change="onScaleSelect" showSecondaryValues="true" items="{
+                            path: 'SCALELISTMODEL>/scales',
+                            sorter: { path: 'SCALELISTMODEL>resource' }
+                            }">
+                                <core:ListItem key="{SCALELISTMODEL>resource}" text="{SCALELISTMODEL>resource}" additionalText="{SCALELISTMODEL>resource}" />
+                        </ComboBox>
+                        </HBox>
+
+                        <Label text="" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox/>
+
+                        <Label  text="Net Weight Quantity" labelFor="idNetWeightQty" class="mediumText sapUiMediumMarginEnd" />
+                        <FlexBox height="3rem">
+                            <Input id="idNetWeightQty" placeholder="Enter Net Weight"  type="Number" value="" 
+                            width="auto" showValueHelp="false" submit="onScanGIQuantity" required="true" 
+                            valueStateText="" valueState="Success" class="customScanText" maxLength="0" />
+                            <HBox id="idVBoxUOMNW" visible="true" class="sapUiTinyMarginBegin">
+                                <ComboBox required="true" width="auto" id="idNWUOM" 
+                                 class="mediumText sapUiTinyMarginEnd"  change="onScaleUOMSelect" 
+                                    items="{
+                                    path: 'ORDERUOMLIST>/orderUOMList',
+                                    sorter: { path: 'ORDERUOMLIST>uom' }
+                                    }"
+                                 showSecondaryValues="false">
+                                        <core:ListItem key="{ORDERUOMLIST>uom}" text="{ORDERUOMLIST>uom}"  />
+                                </ComboBox>
+
+                                 <Button text="Measure" type="Accept" press="onScaleReadMeasure" class="customButtonMedium sapUiTinyMarginBegin" />
+                                <layoutData>
+                                    <l:GridData xmlns:layout="sap.ui.layout" span="L3 M3 S4" /> 
+                                </layoutData>
+                            </HBox>
+                        </FlexBox>
+
+                         
+                        <Label text="" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox/>
+                        <Label text="" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox/>
+
+                        <Label text="" class="mediumText sapUiMediumMarginEnd" />
+                        <HBox id="idVBoxActionButtons" visible="true" 
+                        height="3rem" class="sapUiTinyMarginBegin customButtonBig">
+                            <Button text="Submit" type="Accept" press="onSubmit" class="sapUiMediumMarginEnd" />
+                            
+                   
+                           
+                        </HBox>
+                        
+                    </f:content>
+                </f:SimpleForm>
+            </VBox>
+        </content>
+    </Panel>
+</mvc:View>
